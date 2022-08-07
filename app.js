@@ -18,10 +18,20 @@ canvas.height = 800;
 // ctx.fill();
 
 /** moveTo and lineTo */
-ctx.moveTo(50, 50); // x좌표, y좌표
-ctx.lineTo(150, 50);    // x좌표 이동, y좌표 이동
-ctx.lineTo(150, 150);
-ctx.lineTo(50, 150);
-ctx.lineTo(50, 50);
-ctx.fill();
+// ctx.moveTo(50, 50); // x좌표, y좌표
+// ctx.lineTo(150, 50);    // x좌표 이동, y좌표 이동
+// ctx.lineTo(150, 150);
+// ctx.lineTo(50, 150);
+// ctx.lineTo(50, 50);
+// ctx.fill();
 
+/** house */
+ctx.fillRect(200, 200, 50, 200);
+ctx.fillRect(400, 200, 50, 200);
+ctx.lineWidth = 2;
+ctx.fillRect(300, 300, 50, 100);
+ctx.fillRect(200, 200, 200, 20);
+ctx.moveTo(200, 200);
+ctx.lineTo(325, 100);
+ctx.lineTo(450, 200);
+ctx.fill();
