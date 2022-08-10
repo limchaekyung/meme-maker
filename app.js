@@ -1,3 +1,4 @@
+const textInput = document.getElementById('text');
 const fileInput = document.getElementById('file');
 
 const eraserBtn = document.getElementById('eraser-btn');
@@ -16,6 +17,7 @@ const CANVAS_HEIGHT = 800;
 canvas.width = CANVAS_WIDTH;
 canvas.height = CANVAS_HEIGHT;
 ctx.lineWidth = lineWidth.value;
+ctx.lineCap = "round";
 
 let isPainting = false;
 let isFilling = false;
@@ -90,6 +92,19 @@ function onFileChange(event) {
         fileInput.value = null;
     }
 }
+
+function onDoubleClick(event) {
+    const text = textInput.value;
+    if (text !== "") {
+        ctx.save(); // ctx의 현재 상태 저장
+        ctx.lineWidth = 1;
+        ctx.font = "68px serif";
+        ctx.fillText(text, event.offsetX, event.offsetY);
+        ctx.restore();  // 저장했었던 버전으로 되돌림
+    }
+}
+
+canvas.addEventListener("dblclick", onDoubleClick);
 
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
