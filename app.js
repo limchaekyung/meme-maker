@@ -1,3 +1,5 @@
+const saveBtn = document.getElementById('save');
+
 const textInput = document.getElementById('text');
 const fileInput = document.getElementById('file');
 
@@ -104,6 +106,14 @@ function onDoubleClick(event) {
     }
 }
 
+function onSaveClick() {
+    const url = canvas.toDataURL(); // 이미지를 url로 변경
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "myDrawing.png";
+    a.click();
+}
+
 canvas.addEventListener("dblclick", onDoubleClick);
 
 canvas.addEventListener("mousemove", onMove);
@@ -121,3 +131,5 @@ destroyBtn.addEventListener("click", onDestroyClick);
 eraserBtn.addEventListener("click", onEraserClick);
 
 fileInput.addEventListener("change", onFileChange);
+
+saveBtn.addEventListener("click", onSaveClick);
