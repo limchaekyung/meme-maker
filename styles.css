@@ -2,40 +2,39 @@
 
 body{
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f6f9fc;
     gap: 20px;
-    justify-content: space-between;
-    align-items: flex-start;
-    background-color: gainsboro;
-    padding: 20px;
+    padding: 20px 0;
 }
 canvas{
-    width: 800px;
-    height: 800px;
+    width: 700px;
+    height: 700px;
     background-color: white;
     border-radius: 10px;
+    margin-bottom: 30px;
 }
-body{
+.btnc{
     display: flex;
-    align-items: center;
-    justify-content: center;
+    gap: 20px;
 }
 .btns{
     display: flex;
-    flex-direction: column;
     gap: 20px;
 }
 .color-options{
     display: flex;
-    flex-direction: column;
-    gap: 20px;
     align-items: center;
+    gap: 20px;
+    margin-top: 30px;;
 }
 .color-option{
     width: 50px;
     height: 50px;
     border-radius: 50%;
     cursor: pointer;
-    border: 5px solid white;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(50, 50, 93, 0.11);
     transition: transform ease-in-out .1s;
 }
 .color-option:hover{
@@ -46,7 +45,7 @@ input#color{
 }
 button, label{
     all: unset;
-    padding: 10px 0;
+    padding: 10px;
     text-align: center;
     background-color: royalblue;
     color: white;

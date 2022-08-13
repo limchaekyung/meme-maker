@@ -4,7 +4,7 @@ const textInput = document.getElementById('text');
 const fileInput = document.getElementById('file');
 
 const eraserBtn = document.getElementById('eraser-btn');
-const destroyBtn = document.getElementById('destroy-btn');
+const resetBtn = document.getElementById('reset-btn');
 const modeBtn = document.getElementById('mode-btn');
 
 const colorOptions = Array.from(document.getElementsByClassName('color-option'));
@@ -13,8 +13,8 @@ const lineWidth = document.getElementById('line-width');
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext("2d");
 
-const CANVAS_WIDTH = 800;
-const CANVAS_HEIGHT = 800;
+const CANVAS_WIDTH = 700;
+const CANVAS_HEIGHT = 700;
 
 canvas.width = CANVAS_WIDTH;
 canvas.height = CANVAS_HEIGHT;
@@ -74,10 +74,10 @@ function onCanvasClick() {
     }
 }
 
-function onDestroyClick() {
-    ctx.fillStyle = "white";
-    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+function onResetClick() {
+    ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 }
+
 function onEraserClick() {
     ctx.strokeStyle = "white";
     isFilling = false;
@@ -114,6 +114,10 @@ function onSaveClick() {
     a.click();
 }
 
+function handleCM(event) {   //마우스 우클릭 방지
+    event.preventDefault();
+}
+
 canvas.addEventListener("dblclick", onDoubleClick);
 
 canvas.addEventListener("mousemove", onMove);
@@ -127,9 +131,11 @@ color.addEventListener("change", onColorChange);
 colorOptions.forEach(color => color.addEventListener('click', onColorclick));
 
 modeBtn.addEventListener("click", onModeClick);
-destroyBtn.addEventListener("click", onDestroyClick);
+resetBtn.addEventListener("click", onResetClick);
 eraserBtn.addEventListener("click", onEraserClick);
 
 fileInput.addEventListener("change", onFileChange);
 
 saveBtn.addEventListener("click", onSaveClick);
+
+canvas.addEventListener("contextmenu", handleCM);
