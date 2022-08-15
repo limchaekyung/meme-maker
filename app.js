@@ -1,4 +1,5 @@
-const shapeBtn = document.getElementById('shape-btn');
+const slideValue = document.querySelector('span')
+const inputSlider = document.querySelector('input')
 
 const saveBtn = document.getElementById('save');
 
@@ -25,7 +26,6 @@ ctx.lineCap = "round";
 
 let isPainting = false;
 let isFilling = false;
-let shaping = false;
 
 function onMove(event) {
     if (isPainting) {
@@ -64,10 +64,10 @@ function onColorclick(event) {
 function onModeClick() {
     if (isFilling) {
         isFilling = false;
-        modeBtn.innerText = "Fill";
+        modeBtn.innerText = "채우기";
     } else {
         isFilling = true;
-        modeBtn.innerText = "Draw";
+        modeBtn.innerText = "그리기";
     }
 }
 
@@ -84,7 +84,7 @@ function onResetClick() {
 function onEraserClick() {
     ctx.strokeStyle = "white";
     isFilling = false;
-    modeBtn.innerText = "Fill";
+    modeBtn.innerText = "채우기";
 }
 
 function onFileChange(event) {
@@ -121,26 +121,15 @@ function handleCM(event) {   //마우스 우클릭 방지
     event.preventDefault();
 }
 
-function onShapeClick() {
-    if (shaping) {
-        shaping = false;
-        shapeBtn.innerText = "Shape";
-    } else {
-        shaping = true;
-        shapeBtn.innerText = "Line";
-    }
-}
-
-
-function onShape(event) {
-    if (shaping) {
-        ctx.beginPath();
-        ctx.lineTo(event.offsetX, event.offsetY);
-        ctx.fill();
-        return;
-    }
-    ctx.moveTo(event.offsetX, event.offsetY);
-}
+inputSlider.oninput = (() => {
+    let value = inputSlider.value;
+    slideValue.textContent = value;
+    slideValue.style.left = (value * 10) + "%";
+    slideValue.classList.add("show");
+})
+inputSlider.onblur = (() => {
+    slideValue.classList.remove("show");
+})
 
 canvas.addEventListener("dblclick", onDoubleClick);
 
@@ -157,7 +146,6 @@ colorOptions.forEach(color => color.addEventListener('click', onColorclick));
 modeBtn.addEventListener("click", onModeClick);
 resetBtn.addEventListener("click", onResetClick);
 eraserBtn.addEventListener("click", onEraserClick);
-shapeBtn.addEventListener("click", onShapeClick);
 
 fileInput.addEventListener("change", onFileChange);
 
