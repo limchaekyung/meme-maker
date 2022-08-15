@@ -1,3 +1,5 @@
+const shapeBtn = document.getElementById('shape-btn');
+
 const saveBtn = document.getElementById('save');
 
 const textInput = document.getElementById('text');
@@ -23,6 +25,7 @@ ctx.lineCap = "round";
 
 let isPainting = false;
 let isFilling = false;
+let shaping = false;
 
 function onMove(event) {
     if (isPainting) {
@@ -118,6 +121,27 @@ function handleCM(event) {   //마우스 우클릭 방지
     event.preventDefault();
 }
 
+function onShapeClick() {
+    if (shaping) {
+        shaping = false;
+        shapeBtn.innerText = "Shape";
+    } else {
+        shaping = true;
+        shapeBtn.innerText = "Line";
+    }
+}
+
+
+function onShape(event) {
+    if (shaping) {
+        ctx.beginPath();
+        ctx.lineTo(event.offsetX, event.offsetY);
+        ctx.fill();
+        return;
+    }
+    ctx.moveTo(event.offsetX, event.offsetY);
+}
+
 canvas.addEventListener("dblclick", onDoubleClick);
 
 canvas.addEventListener("mousemove", onMove);
@@ -133,6 +157,7 @@ colorOptions.forEach(color => color.addEventListener('click', onColorclick));
 modeBtn.addEventListener("click", onModeClick);
 resetBtn.addEventListener("click", onResetClick);
 eraserBtn.addEventListener("click", onEraserClick);
+shapeBtn.addEventListener("click", onShapeClick);
 
 fileInput.addEventListener("change", onFileChange);
 
